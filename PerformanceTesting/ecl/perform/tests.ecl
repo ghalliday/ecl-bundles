@@ -1,11 +1,9 @@
 import $.config;
 import $.files;
+import $.format;
 
 EXPORT tests := MODULE
-    EXPORT join(unsigned expectedMatches) := MODULE
-        SHARED dsLeft := files.generateSimpleScaled(0, expectedMatches);
-        SHARED dsRight := files.generateSimpleScaled(NOFOLD(0), expectedMatches);
-
+    SHARED joins(unsigned expectedMatches, DATASET(format.simpleRec) dsLeft, DATASET(format.simpleRec) dsRight) := MODULE
         SHARED numInputRows := config.simpleRecordCount DIV expectedMatches;
         EXPORT numExpected := (numInputRows DIV expectedMatches) * expectedMatches * expectedMatches + (numInputRows % expectedMatches) * (numInputRows % expectedMatches);
         
@@ -28,6 +26,17 @@ EXPORT tests := MODULE
         EXPORT joinLocalLookup := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), MANY LOOKUP, LOCAL);
         EXPORT joinLocalHash := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), HASH, LOCAL);
         EXPORT joinLocalSmart := JOIN(dsLeft, dsRight, test(LEFT, RIGHT), SMART, LOCAL);
+    END;
+
+    EXPORT join(unsigned expectedMatches) := FUNCTION
+        LOCAL dsLeft := files.generateSimpleScaled(0, expectedMatches);
+        LOCAL dsRight := files.generateSimpleScaled(NOFOLD(0), expectedMatches);
+        RETURN joins(expectedMatches, dsLeft, dsRight);
+    END;
+
+    EXPORT selfjoin(unsigned expectedMatches) := FUNCTION
+        LOCAL dsLeft := files.generateSimpleScaled(0, expectedMatches);
+        RETURN joins(expectedMatches, dsLeft, dsLeft);
     END;
 
     EXPORT smartjoin(real scaleNode, real scaleTotal, unsigned expectedMatches) := MODULE

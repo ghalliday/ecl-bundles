@@ -16,7 +16,7 @@ import suite.perform.config;
 import suite.perform.format;
 import suite.perform.files;
 
-groupSize := #IFDEFINED(root.groupSize, 4);
+groupSize := #IFDEFINED(root.groupSize, 0x10000);
 
 ds := files.generateSimple();
 

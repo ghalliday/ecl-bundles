@@ -71,6 +71,7 @@ These tests create lots of records, and test how different sources work
 | 01ae - single input, split the output n-ways (no overlap between outputs)
 | 01af - execute multiple counts in parallel (no splitter)
 | 01ag..al - 2,4,8,12,16,32 way unordered append - tests scaling of the multi threaded concat.
+| 01am - test creating certain number of rows but throwing away all after the first n
 
 01b - Raw disk write speed [class: diskwrite]
 --------------------------

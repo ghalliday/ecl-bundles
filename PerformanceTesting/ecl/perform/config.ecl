@@ -1,7 +1,7 @@
 /*
 This file contains all the constants that configure how many records will be generated.  It is archived if the results are saved.
 */
-import $.^ as root;
+import ^ as root;
 export config := MODULE
     export smokeTest := FALSE; // If True, some of the tests use much smaller data
     export memoryPerSlave := 0x100000000; // 4Gb is fairly standard memory configuration

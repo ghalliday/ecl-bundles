@@ -136,7 +136,7 @@ projectWork := #IFDEFINED(root.hintProjectWork, 4);
 parallelSource := #IFDEFINED(root.hintParallelSource, false);
 parallelCount := #IFDEFINED(root.hintParallelCount, false);
 
-numRecords := 50000000;
+numRecords := 500000000;
 
 unsigned8 performWork(unsigned8 value, unsigned iter) := BEGINC++
     #option pure

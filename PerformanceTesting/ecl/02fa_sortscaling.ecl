@@ -9,7 +9,7 @@ import suite.perform.files;
 
 inRec := { unsigned8 delta; };
 
-processN(unsigned num) := FUNCTION 
+processN(unsigned num) := FUNCTION
     ds := files.generateN(0, num);
     s1 := sort(ds, id3);
     s2 := SORTED(NOFOLD(s1), id3, local, assert);

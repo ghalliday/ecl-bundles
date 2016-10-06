@@ -10,7 +10,9 @@ export files := MODULE
 
     export generateN(unsigned delta = 0, unsigned num) := NOFOLD(DATASET(num, format.createSimple(COUNTER + delta), DISTRIBUTED));
 
-    export generateSimple(unsigned delta = 0) := DATASET(config.simpleRecordCount, format.createSimple(COUNTER + delta), DISTRIBUTED,HINT(heapflags(config.heapFlags)));
+    export generateSimple(unsigned delta = 0) := DATASET(config.simpleRecordCount, format.createSimple(COUNTER + delta), DISTRIBUTED, HINT(heapflags(config.heapFlags)));
+
+    export generateSimpleLocal(unsigned delta = 0) := DATASET(config.recordPerNode, format.createSimple(COUNTER + delta), LOCAL, HINT(heapflags(config.heapFlags)));
 
     export generateSimpleScaled(unsigned delta = 0, unsigned scale) := generateN(delta, config.simpleRecordCount DIV scale);
 
@@ -24,7 +26,7 @@ export files := MODULE
 
     export xmlSimple(boolean compressed) := DATASET(simpleName+suffix(compressed)+'_xml', format.simpleRec, XML('', NOROOT));
 
-    export diskPadded(boolean compressed) := DATASET(paddedName+suffix(compressed), format.paddedRec, FLAT);
+    export diskPadded(boolean compressed) := DATASET(paddedName+suffix(compressed), format.paddedRec, FLAT, HINT(heapflags(config.heapFlags)));
 
     export diskSplit(unsigned part) := DATASET(paddedName+suffix(false)+'_' + (string)part, format.simpleRec, FLAT);
 

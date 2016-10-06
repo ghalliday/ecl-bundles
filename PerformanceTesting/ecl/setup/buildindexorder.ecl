@@ -9,7 +9,7 @@ import suite.perform.files;
 
 ds := DATASET(config.simpleRecordCount * config.indexScale, format.createSimple(COUNTER), DISTRIBUTED);
 
-i:= INDEX(ds,{ 
+i:= INDEX(ds,{
     unsigned1 id1a := id1 >> 56;
     unsigned1 id1b := id1 >> 48;
     unsigned1 id1c := id1 >> 40;
@@ -19,5 +19,5 @@ i:= INDEX(ds,{
     unsigned1 id1g := id1 >> 8;
     unsigned1 id1h := id1 >> 0;
     id2, id3 }, { id4 }, files.indexName+'_id1xid2id3id4');
-    
+
 BUILDINDEX(i, OVERWRITE);
